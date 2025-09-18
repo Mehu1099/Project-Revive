@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Revive - Glimpse of Sangam Vihar</title>
+    
+    <!-- Google Fonts - Poppins (same as cover page) -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Link to photo grid CSS file -->
+    <link rel="stylesheet" href="photogrid-styles.css">
+</head>
+
+
+<body>
+    <!-- ==================== PHOTO GRID SECTION ==================== -->
+    
+    <!-- Main Container -->
+    <div class="grid-container">
+        <!-- Minimalist page title -->
+        <h1 class="page-title">SANGAM VIHAR AT A GLANCE</h1> <!--Change photo gallery title-->
+        
+        <!-- Photo Grid - 2 rows x 5 columns -->
+        <div class="photo-grid">
+            <!-- Row 1 -->
+            <div class="photo-item photo-1">
+                <!-- CUSTOMIZE: Replace with your actual image paths -->
+                <img src="Images/Photos for Introduction/IMG_9273.jpg" alt="Photo 1" loading="lazy">
+            </div>
+            <div class="photo-item photo-2">
+                <img src="Images/Photos for Introduction/IMG_9297.jpg" alt="Photo 2" loading="lazy">
+            </div>
+            <div class="photo-item photo-3">
+                <img src="Images/Photos for Introduction/IMG_9303.jpg" alt="Photo 3" loading="lazy">
+            </div>
+            <div class="photo-item photo-4">
+                <img src="Images/Photos for Introduction/IMG_9305.jpg" alt="Photo 4" loading="lazy">
+            </div>
+            <div class="photo-item photo-5">
+                <img src="Images/Photos for Introduction/IMG_9316.jpg" alt="Photo 5" loading="lazy">
+            </div>
+            
+            <!-- Row 2 -->
+            <div class="photo-item photo-6">
+                <img src="Images/Photos for Introduction/IMG_9340.jpg" alt="Photo 6" loading="lazy">
+            </div>
+            <div class="photo-item photo-7">
+                <img src="Images/Photos for Introduction/IMG_9346.jpg" alt="Photo 7" loading="lazy">
+            </div>
+            <div class="photo-item photo-8">
+                <img src="Images/Photos for Introduction/IMG_9359.jpg" alt="Photo 8" loading="lazy">
+            </div>
+            <div class="photo-item photo-9">
+                <img src="Images/Photos for Introduction/IMG_9372.jpg" alt="Photo 9" loading="lazy">
+            </div>
+            <div class="photo-item photo-10">
+                <img src="Images/Photos for Introduction/IMG_9380.jpg" alt="Photo 10" loading="lazy">
+            </div>
+        </div>
+    </div>
+
+
+    <!-- ==================== VIDEO SECTION ==================== -->
+    
+    <!-- Full-page video section that appears when scrolling down -->
+    <div class="video-section">
+        <div class="video-container">
+            <!-- CUSTOMIZE: Replace with your actual video file path -->
+            <video class="scroll-video" muted playsinline preload="auto" poster="Images/your-video-poster.jpg">
+                <source src="Videos/Second Transition.mp4" type="video/mp4">
+                <source src="Videos/Second Transition.mp4" type="video/webm">
+                <source src="Videos/Second Transition.mp4" type="video/quicktime">
+                Your browser does not support the video tag.
+            </video>
+        </div>
+        
+        <!-- Reality Check button - initially hidden, shows after video ends -->
+        <div class="video-content">
+            <a href="next-page.html" class="reality-button">Reality Check</a>
+            <!-- CHANGE "next-page.html" to your desired next page -->
+        </div>
+    </div>
+
+
+
+
+    <script>
+        /* ==================== JAVASCRIPT ==================== */
+        
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('Clean photo gallery loaded successfully!');
+            
+            // ===================================================================
+            // SCROLL-TRIGGERED VIDEO FUNCTIONALITY
+            // ===================================================================
+            
+            const video = document.querySelector('.scroll-video');
+            const videoSection = document.querySelector('.video-section');
+            
+            if (video && videoSection) {
+                console.log('Scroll video element found!');
+                
+                // Set video playback rate to normal speed
+                video.playbackRate = 1.0; // Normal speed
+                
+                // Remove loop attribute for single playthrough
+                video.loop = false;
+                
+                // Intersection Observer to detect when video section comes into view
+                const observer = new IntersectionObserver(function(entries) {
+                    entries.forEach(function(entry) {
+                        if (entry.isIntersecting) {
+                            // Video section is visible, start playing
+                            console.log('Video section visible - starting video');
+                            video.play().catch(function(error) {
+                                console.log('Video autoplay failed:', error);
+                            });
+                        } else {
+                            // Video section not visible, pause video (only if not ended)
+                            if (!video.ended) {
+                                video.pause();
+                            }
+                        }
+                    });
+                }, {
+                    threshold: 0.3 // Trigger when 30% of video section is visible
+                });
+                
+                // Start observing the video section
+                observer.observe(videoSection);
+                
+                // Video event listeners for debugging
+                video.addEventListener('loadstart', function() {
+                    console.log('Scroll video loading started...');
+                });
+                
+                video.addEventListener('canplay', function() {
+                    console.log('Scroll video can start playing');
+                });
+                
+                video.addEventListener('loadeddata', function() {
+                    console.log('Scroll video loaded successfully!');
+                });
+                
+                video.addEventListener('error', function(e) {
+                    console.log('Scroll video error:', e);
+                });
+                
+                // ===================================================================
+                // VIDEO END AND FADE OUT FUNCTIONALITY
+                // ===================================================================
+                
+                video.addEventListener('ended', function() {
+                    console.log('Video finished playing - starting fade out');
+                    
+                    // Add fade-out class to video
+                    video.classList.add('fade-out');
+                    
+                    // Show the reality check button after fade completes
+                    setTimeout(() => {
+                        const realityButton = document.querySelector('.reality-button');
+                        if (realityButton) {
+                            realityButton.classList.add('show');
+                            console.log('Reality check button shown');
+                        }
+                    }, 2000); // Wait for 2 second fade-out to complete
+                });
+                
+            } else {
+                console.log('Scroll video element not found!');
+            }
+            
+            // ===================================================================
+            // REALITY CHECK BUTTON FUNCTIONALITY
+            // ===================================================================
+            
+            const realityButton = document.querySelector('.reality-button');
+            if (realityButton) {
+                realityButton.addEventListener('click', function(e) {
+                    console.log('Reality check button clicked!');
+                    
+                    // Optional: Add fade transition effect
+                    document.body.style.transition = 'opacity 0.5s ease-out';
+                    document.body.style.opacity = '0';
+                    
+                    // Navigate after fade effect
+                    setTimeout(() => {
+                        window.location.href = 'next-page.html'; // CUSTOMIZE: Change destination
+                    }, 500);
+                    
+                    e.preventDefault(); // Prevent immediate navigation
+                });
+            }
+            
+            // ===================================================================
+            // DEBUG INFORMATION
+            // ===================================================================
+            
+            console.log('=== UPDATED PHOTO GALLERY INFO ===');
+            console.log('Design: Clean, minimalist, professional');
+            console.log('Photos: 10 images in 2×5 grid');
+            console.log('Background: White');
+            console.log('Title: Thin Poppins font, lowercase');
+            console.log('Effects: Sequential fade-in, no hover animations');
+            console.log('Video: Normal speed, scroll-triggered, fades to black when done');
+            console.log('Button: Appears after video ends, matches cover page style');
+        });
+    </script>
+</body>
+</html>

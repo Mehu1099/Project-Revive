@@ -1,0 +1,164 @@
+/* Basic Body Setup */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    overflow: hidden; /* Prevents scrollbars during animation */
+    background: #414042; /* Gray background */
+}
+
+/* ==================== VIDEO BACKGROUND ==================== */
+.video-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1; /* Places video behind all other content */
+    overflow: hidden;
+    /* Gray background when video fades out */
+    background: #414042;
+}
+
+.background-video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Ensures video covers entire screen */
+    /* Video fades out after playing for a few seconds */
+    animation: videoFadeOut 2s ease-in-out 3s forwards; /* Starts fade at 3s, completes by 5s */
+    /* Ensure video is visible and properly positioned */
+    position: absolute;
+    top: 0;
+    left: 0;
+    opacity: 1;
+    /* Smooth video rendering for better slow motion effect */
+    transform: translateZ(0); /* Hardware acceleration */
+    backface-visibility: hidden; /* Smoother animation */
+    will-change: transform, opacity; /* Optimize for animations */
+}
+
+/* Video fade-out animation */
+@keyframes videoFadeOut {
+    0% {
+        opacity: 1;
+    }
+    100% {
+        opacity: 0;
+    }
+}
+
+/* ==================== CONTENT CONTAINER ==================== */
+.content {
+    position: relative;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    color: white;
+    z-index: 1;
+}
+
+/* ==================== TITLE STYLING ==================== */
+.title {
+    /* CUSTOMIZE: Change title text size, color, and spacing here */
+    font-size: 4rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+    opacity: 0;
+    transform: translateY(30px);
+    animation: fadeInUp 1.5s ease-out 6s forwards; /* Starts after video fades out completely (6s) */
+    text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.7); /* Adds shadow for better readability */
+}
+
+/* ==================== SUBTITLE STYLING ==================== */
+.subtitle {
+    /* CUSTOMIZE: Change subtitle text size, color, and spacing here */
+    font-size: 1.5rem;
+    font-weight: 300;
+    margin-bottom: 3rem;
+    opacity: 0;
+    transform: translateY(30px);
+    animation: fadeInUp 1.5s ease-out 7s forwards; /* Starts 1 second after title (7s) */
+    text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.7);
+}
+
+/* ==================== BUTTON STYLING ==================== */
+.enter-button {
+    /* CUSTOMIZE: Button with white background and colored border */
+    background: white;
+    color: #f36e48; /* Text color matches the border */
+    border: 2px solid #f36e48; /* Colored outline */
+    padding: 15px 40px;
+    font-size: 1.2rem;
+    font-weight: 600;
+    border-radius: 50px;
+    cursor: pointer;
+    text-decoration: none;
+    display: inline-block;
+    opacity: 0;
+    transform: translateY(30px);
+    animation: fadeInUp 1.5s ease-out 8s forwards; /* Starts 1 second after subtitle (8s) */
+    transition: all 0.3s ease;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+}
+
+.enter-button:hover {
+    /* CUSTOMIZE: Hover effect - fills with color, white text */
+    background: #f36e48;
+    color: white;
+    transform: translateY(-2px);
+    box-shadow: 0 12px 35px rgba(243, 110, 72, 0.4); /* Shadow matches button color */
+    border-color: #f36e48;
+}
+
+/* ==================== TITLE ACCENT (FIRST TWO LETTERS) ==================== */
+.title-accent {
+    /* CUSTOMIZE: Color for the first two letters of title */
+    color: #f36e48;
+}
+
+/* ==================== ANIMATIONS ==================== */
+@keyframes fadeInUp {
+    0% {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* ==================== RESPONSIVE DESIGN ==================== */
+/* CUSTOMIZE: Adjust these breakpoints and sizes for different screen sizes */
+@media (max-width: 768px) {
+    .title {
+        font-size: 2.5rem;
+    }
+    
+    .subtitle {
+        font-size: 1.2rem;
+        margin-bottom: 2rem;
+    }
+    
+    .enter-button {
+        padding: 12px 30px;
+        font-size: 1rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .title {
+        font-size: 2rem;
+    }
+    
+    .subtitle {
+        font-size: 1rem;
+    }
+}

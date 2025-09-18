@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Revive</title>
+    
+    <!-- Google Fonts - Poppins -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Link to external CSS file -->
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+
+<body>
+    <!-- ==================== HTML STRUCTURE ==================== -->
+    
+    <!-- Video Background Container -->
+    <div class="video-container">
+        <!-- CUSTOMIZE: Replace these with your actual video file paths -->
+        <!-- Add multiple formats for maximum browser compatibility -->
+        <video class="background-video" autoplay muted loop playsinline preload="auto" poster="Images/your-poster-image.jpg">
+            <!-- CUSTOMIZE: Update paths to point to your Videos folder -->
+            <source src="Videos/Cover Page.mp4" type="video/mp4">
+            <source src="Videos/Cover Page.mp4" type="video/webm">
+            <source src="Videos/Cover Page.mp4" type="video/quicktime">
+            <source src="Videos/Cover Page.mp4" type="video/ogg">
+            <!-- Fallback message for browsers that don't support video -->
+            Your browser does not support the video tag.
+        </video>
+    </div>
+    
+    <!-- Main Content Container -->
+    <div class="content">
+        <!-- CUSTOMIZE: Change your title text here -->
+        <!-- First two letters will be colored #f36e48 -->
+        <h1 class="title"><span class="title-accent">.re</span>vive</h1>
+        
+        <!-- CUSTOMIZE: Change your subtitle text here -->
+        <p class="subtitle">re-thinking informality in informal settlements</p>
+        
+        <!-- TRANSITION BUTTON - This handles navigation to next page -->
+        <!-- PAGE TRANSITION: This button will navigate to the next page -->
+        <!-- You can change the button text and link destination here -->
+        <a href="photogrid.html" class="enter-button">Enter</a>
+    </div>
+
+</body>
+</html>
